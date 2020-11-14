@@ -1,6 +1,7 @@
 package todo_test
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -96,5 +97,24 @@ func TestSaveGet(t *testing.T) {
 
 	if l1[0].Task != l2[0].Task {
 		t.Errorf("Task %q should match %q task.", l1[0].Task, l2[0].Task)
+	}
+}
+
+func TestVerbose(t *testing.T) {
+	l := todo.List{}
+
+	taskName := "New Task"
+	l.Add(taskName)
+
+	if l[0].Task != taskName {
+		t.Errorf("Expected %q, got %q instead", taskName, l[0].Task)
+	}
+
+	expected := fmt.Sprintf("%s%d: %s, %s\n", "  ", 1, l[0].Task, l[0].CreatedAt.Format("02 Jan 2006 15:04:05"))
+
+	out := l.Verbose()
+
+	if expected != out {
+		t.Errorf("Expected %q, got %q instead\n", expected, out)
 	}
 }

@@ -22,6 +22,7 @@ func main() {
 	list := flag.Bool("list", false, "List all tasks")
 	complete := flag.Int("complete", 0, "Item to be completed")
 	delete := flag.Int("delete", 0, "Item to be deleted")
+	verbose := flag.Bool("verbose", false, "Verbose mode")
 
 	flag.Parse()
 
@@ -33,6 +34,8 @@ func main() {
 	}
 
 	switch {
+	case *list && *verbose:
+		fmt.Print(l.Verbose())
 	case *list:
 		fmt.Print(l)
 	case *complete > 0:
