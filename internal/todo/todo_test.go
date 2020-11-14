@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/runeanielsen/go-todo"
+	"github.com/runeanielsen/go-todo/internal/todo"
 )
 
 func TestAdd(t *testing.T) {

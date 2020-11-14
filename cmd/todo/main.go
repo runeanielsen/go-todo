@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/runeanielsen/go-todo"
+	"github.com/runeanielsen/go-todo/internal/todo"
 )
 
 var todoFileName = ".todo.json"
