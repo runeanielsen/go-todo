@@ -21,3 +21,6 @@
 
 ### Bin ###
 /bin
+
+### Project specific ###
+*.todo.json
