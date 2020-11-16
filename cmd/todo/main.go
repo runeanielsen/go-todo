@@ -18,11 +18,12 @@ func main() {
 		todoFileName = os.Getenv("TODO_FILENAME")
 	}
 
-	add := flag.Bool("add", false, "Add task to the Todo list")
+	add := flag.Bool("add", false, "Add item to the Todo list")
 	list := flag.Bool("list", false, "List all tasks")
 	complete := flag.Int("complete", 0, "Item to be completed")
 	delete := flag.Int("delete", 0, "Item to be deleted")
 	verbose := flag.Bool("verbose", false, "Verbose mode")
+	hideCompleted := flag.Bool("hidecompleted", false, "Hide completed items")
 
 	flag.Parse()
 
@@ -34,10 +35,8 @@ func main() {
 	}
 
 	switch {
-	case *list && *verbose:
-		fmt.Print(l.Verbose())
 	case *list:
-		fmt.Print(l)
+		fmt.Print(l.Display(*verbose, *hideCompleted))
 	case *complete > 0:
 		if err := l.Complete(*complete); err != nil {
 			fmt.Fprintln(os.Stderr, err)

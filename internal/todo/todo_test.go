@@ -112,7 +112,34 @@ func TestVerbose(t *testing.T) {
 
 	expected := fmt.Sprintf("%s%d: %s, %s\n", "  ", 1, l[0].Task, l[0].CreatedAt.Format("02 Jan 2006 15:04:05"))
 
-	out := l.Verbose()
+	out := l.Display(true, false)
+
+	if expected != out {
+		t.Errorf("Expected %q, got %q instead\n", expected, out)
+	}
+}
+
+func TestHideCompletedVerbose(t *testing.T) {
+	l := todo.List{}
+
+	taskNameOne := "New Task One"
+	taskNameTwo := "New Task Two"
+	l.Add(taskNameOne)
+	l.Add(taskNameTwo)
+
+	l[1].Done = true
+
+	if l[0].Task != taskNameOne {
+		t.Errorf("Expected %q, got %q instead", taskNameOne, l[0].Task)
+	}
+
+	if l[1].Task != taskNameTwo {
+		t.Errorf("Expected %q, got %q instead", taskNameTwo, l[0].Task)
+	}
+
+	expected := fmt.Sprintf("%s%d: %s, %s\n", "  ", 1, l[0].Task, l[0].CreatedAt.Format("02 Jan 2006 15:04:05"))
+
+	out := l.Display(true, true)
 
 	if expected != out {
 		t.Errorf("Expected %q, got %q instead\n", expected, out)

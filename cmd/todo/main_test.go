@@ -106,6 +106,34 @@ func TestTodoCLI(t *testing.T) {
 		}
 	})
 
+	t.Run("CompleteTask", func(t *testing.T) {
+		cmd := exec.Command(cmdPath, "-complete")
+
+		if err := cmd.Run(); err != nil {
+			t.Fatal(err)
+		}
+	})
+
+	t.Run("ListsTasksVerboseHideCompleted", func(t *testing.T) {
+		cmd := exec.Command(cmdPath, "-list", "-verbose", "-hide-completed", "1")
+		out, err := cmd.CombinedOutput()
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		matchPattern := "  \\d{1,}: [a-zA-Z 0-9]*, \\d{1,} *[a-zA-z]{0,3} \\d{4} \\d{1,2}:\\d{1,2}:\\d{1,2}\\\n"
+		regExp := fmt.Sprintf("^%s$", matchPattern)
+
+		matches, err := regexp.MatchString(regExp, string(out))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if !matches {
+			t.Errorf("Pattern %q, did not match output %q\n", matchPattern, string(out))
+		}
+	})
+
 	t.Run("DeleteTasks", func(t *testing.T) {
 		cmd := exec.Command(cmdPath, "-delete", "1")
 
