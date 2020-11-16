@@ -56,6 +56,10 @@ echo "My new todo one\nMy new todo two" | ./todo -a
 ./todo -d <task-number>
 ```
 
+### Default path env
+
+To avoid default path set the environment variable `TODO_FILENAME"` to your desired path
+
 ## Dev
 
 * Requires [Go-task](https://taskfile.dev/)
