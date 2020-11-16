@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Build the go binary.
+    cmds:
+      - go build -v -o bin/cmd/todo -i cmd/todo/main.go
+
+  test:
+    desc: Run all the go tests.
+    cmds:
+      - go test -count=1 ./...
+  testv:
+    desc: Run all the go tests verbose.
+    cmds:
+      - go test -count=1 -v ./...
