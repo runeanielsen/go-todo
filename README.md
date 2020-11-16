@@ -58,7 +58,7 @@ echo "My new todo one\nMy new todo two" | ./todo -a
 
 ### Default path env
 
-To avoid default path set the environment variable `TODO_FILENAME"` to your desired path
+To avoid default path set the environment variable `TODO_FILENAME` to your desired path
 
 ## Dev
 
