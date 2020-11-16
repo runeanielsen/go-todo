@@ -15,13 +15,13 @@ Simple CLI todo-app
 #### From STDIN
 
 ``` sh
-echo "My new todo one" | ./todo -a "My new todo one"
+echo "My new todo one" | ./todo -a
 ```
 
 Multi-line example resulting in multiple todos
 
 ``` sh
-echo "My new todo one\nMy new todo two" | ./todo -a "My new todo one"
+echo "My new todo one\nMy new todo two" | ./todo -a
 ```
 
 ### List
