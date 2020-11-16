@@ -107,7 +107,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("CompleteTask", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-complete")
+		cmd := exec.Command(cmdPath, "-complete", "1")
 
 		if err := cmd.Run(); err != nil {
 			t.Fatal(err)
@@ -115,7 +115,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("ListsTasksVerboseHideCompleted", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-list", "-verbose", "-hide-completed", "1")
+		cmd := exec.Command(cmdPath, "-list", "-verbose", "-hide-completed")
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			t.Fatal(err)

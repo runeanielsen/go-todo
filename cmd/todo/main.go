@@ -23,7 +23,7 @@ func main() {
 	complete := flag.Int("complete", 0, "Item to be completed")
 	delete := flag.Int("delete", 0, "Item to be deleted")
 	verbose := flag.Bool("verbose", false, "Verbose mode")
-	hideCompleted := flag.Bool("hidecompleted", false, "Hide completed items")
+	hideCompleted := flag.Bool("hide-completed", false, "Hide completed items")
 
 	flag.Parse()
 
