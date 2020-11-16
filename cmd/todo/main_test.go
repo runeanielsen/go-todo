@@ -13,11 +13,12 @@ import (
 
 var (
 	binName  = "todo"
-	fileName = ".todo.json"
+	fileName = "/tmp/todo-test.json"
 )
 
 func TestMain(m *testing.M) {
 	fmt.Println("Build tool...")
+	os.Setenv("TODO_FILENAME", fileName)
 
 	if runtime.GOOS == "windows" {
 		binName += ".exe"
