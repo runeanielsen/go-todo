@@ -83,10 +83,14 @@ func getTask(r io.Reader, args ...string) (string, error) {
 	}
 
 	s := bufio.NewScanner(r)
-	s.Scan()
-	if err := s.Err(); err != nil {
-		return "", err
+
+	for s.Scan() {
+		if err := s.Err(); err != nil {
+			return "", err
+		}
 	}
+
+	s.Scan()
 
 	if len(s.Text()) == 0 {
 		return "", fmt.Errorf("Task cannot be blank")
