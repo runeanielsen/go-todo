@@ -51,7 +51,7 @@ func TestTodoCLI(t *testing.T) {
 
 	task := "test task number 1"
 	t.Run("AddNewTaskFromArguments", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-add", task)
+		cmd := exec.Command(cmdPath, "-a", task)
 
 		if err := cmd.Run(); err != nil {
 			t.Fatal(err)
@@ -60,7 +60,7 @@ func TestTodoCLI(t *testing.T) {
 
 	task2 := "test task number 2"
 	t.Run("AddNewTaskFromSTDIN", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-add")
+		cmd := exec.Command(cmdPath, "-a")
 		cmdStdIn, err := cmd.StdinPipe()
 		if err != nil {
 			t.Fatal(err)
@@ -74,7 +74,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("ListsTasks", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-list")
+		cmd := exec.Command(cmdPath, "-l")
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			t.Fatal(err)
@@ -88,7 +88,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("ListsTasksVerbose", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-list", "-verbose")
+		cmd := exec.Command(cmdPath, "-l", "-v")
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			t.Fatal(err)
@@ -108,7 +108,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("CompleteTask", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-complete", "1")
+		cmd := exec.Command(cmdPath, "-c", "1")
 
 		if err := cmd.Run(); err != nil {
 			t.Fatal(err)
@@ -116,7 +116,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("ListsTasksVerboseHideCompleted", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-list", "-verbose", "-hide-completed")
+		cmd := exec.Command(cmdPath, "-l", "-v", "-hc")
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			t.Fatal(err)
@@ -136,7 +136,7 @@ func TestTodoCLI(t *testing.T) {
 	})
 
 	t.Run("DeleteTasks", func(t *testing.T) {
-		cmd := exec.Command(cmdPath, "-delete", "1")
+		cmd := exec.Command(cmdPath, "-d", "1")
 
 		if err := cmd.Run(); err != nil {
 			t.Fatal(err)

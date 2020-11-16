@@ -18,12 +18,12 @@ func main() {
 		todoFileName = os.Getenv("TODO_FILENAME")
 	}
 
-	add := flag.Bool("add", false, "Add item to the Todo list")
-	list := flag.Bool("list", false, "List all tasks")
-	complete := flag.Int("complete", 0, "Item to be completed")
-	delete := flag.Int("delete", 0, "Item to be deleted")
-	verbose := flag.Bool("verbose", false, "Verbose mode")
-	hideCompleted := flag.Bool("hide-completed", false, "Hide completed items")
+	add := flag.Bool("a", false, "Add item to the Todo list")
+	list := flag.Bool("l", false, "List all tasks")
+	complete := flag.Int("c", 0, "Item to be completed")
+	delete := flag.Int("d", 0, "Item to be deleted")
+	verbose := flag.Bool("v", false, "Verbose mode")
+	hideCompleted := flag.Bool("hc", false, "Hide completed items")
 
 	flag.Parse()
 
