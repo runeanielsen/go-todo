@@ -73,6 +73,25 @@ func TestTodoCLI(t *testing.T) {
 		}
 	})
 
+	task3 := "test task number 3"
+	task4 := "test task number 4"
+	t.Run("AddNewTaskFromMultilineSTDIN", func(t *testing.T) {
+		cmd := exec.Command(cmdPath, "-a")
+		cmdStdIn, err := cmd.StdinPipe()
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		i := fmt.Sprintf("%s\n%s", task3, task4)
+
+		io.WriteString(cmdStdIn, i)
+		cmdStdIn.Close()
+
+		if err := cmd.Run(); err != nil {
+			t.Fatal(err)
+		}
+	})
+
 	t.Run("ListsTasks", func(t *testing.T) {
 		cmd := exec.Command(cmdPath, "-l")
 		out, err := cmd.CombinedOutput()
@@ -80,7 +99,7 @@ func TestTodoCLI(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		expected := fmt.Sprintf("  1: %s\n  2: %s\n", task, task2)
+		expected := fmt.Sprintf("  1: %s\n  2: %s\n  3: %s\n  4: %s\n", task, task2, task3, task4)
 
 		if expected != string(out) {
 			t.Errorf("Expected %q, got %q instead\n", expected, string(out))
@@ -95,7 +114,7 @@ func TestTodoCLI(t *testing.T) {
 		}
 
 		matchPattern := "  \\d{1,}: [a-zA-Z 0-9]*, \\d{1,} *[a-zA-z]{0,3} \\d{4} \\d{1,2}:\\d{1,2}:\\d{1,2}\\\n"
-		regExp := fmt.Sprintf("^%s%s$", matchPattern, matchPattern)
+		regExp := fmt.Sprintf("^%s%s%s%s$", matchPattern, matchPattern, matchPattern, matchPattern)
 
 		matches, err := regexp.MatchString(regExp, string(out))
 		if err != nil {
@@ -123,7 +142,7 @@ func TestTodoCLI(t *testing.T) {
 		}
 
 		matchPattern := "  \\d{1,}: [a-zA-Z 0-9]*, \\d{1,} *[a-zA-z]{0,3} \\d{4} \\d{1,2}:\\d{1,2}:\\d{1,2}\\\n"
-		regExp := fmt.Sprintf("^%s$", matchPattern)
+		regExp := fmt.Sprintf("^%s%s%s$", matchPattern, matchPattern, matchPattern)
 
 		matches, err := regexp.MatchString(regExp, string(out))
 		if err != nil {
