@@ -18,7 +18,7 @@ Simple CLI todo-app
 echo "My new todo one" | ./todo -a "My new todo one"
 ```
 
-Multiline example resulting in multiple todos
+Multi-line example resulting in multiple todos
 
 ``` sh
 echo "My new todo one\nMy new todo two" | ./todo -a "My new todo one"
